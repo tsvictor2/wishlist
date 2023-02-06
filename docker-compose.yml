@@ -1,0 +1,9 @@
+---
+version: '2'
+services:
+  oracle:
+    image: tsvictor2/oracle-xe:18.4.0
+    environment:
+      ORACLE_PASSWORD: oracle
+    ports:
+      - "32988:1521"
