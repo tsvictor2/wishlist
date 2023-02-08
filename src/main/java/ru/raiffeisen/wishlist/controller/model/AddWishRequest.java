@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-import static ru.raiffeisen.wishlist.model.Status.NEW;
+import static ru.raiffeisen.wishlist.model.Status.MODERATION;
 
 @Getter
 @Builder
@@ -32,7 +32,7 @@ public class AddWishRequest {
                 .product(product)
                 .subscription(Set.of(Subscription.builder().email(email).build()))
                 .created(OffsetDateTime.now())
-                .status(NEW)
+                .status(MODERATION)
                 .build();
     }
 }
