@@ -73,7 +73,7 @@ public class WishController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(WishNotFoundException.class)
-    void onDbActionExecutionException() {
-        log.warn("Заявка не найдена");
+    void onDbActionExecutionException(WishNotFoundException e) {
+        log.warn("Заявка не найдена", e);
     }
 }
