@@ -14,6 +14,7 @@
 	<name>wishlist</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<java.version>11</java.version>
 		<ojdbc.version>19.14.0.0</ojdbc.version>
 	</properties>
 	<dependencies>
@@ -71,15 +72,8 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>3.0.4</version>
-				<configuration>
-					<appName>wishlist</appName>
-					<processTypes>
-						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* com.example.Main</web>
-					</processTypes>
-				</configuration>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
