@@ -1,5 +1,7 @@
 package ru.raiffeisen.wishlist.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +22,9 @@ public class JiraIssueController {
 
     @Operation(summary = "Оповещение о смене статуса задачи в Jira")
     @PostMapping("/{id}/status-changed")
-    public void statusChanged(@PathVariable Long id, @RequestBody Object request) {
-        log.info("Received /issues/{}/status-changed with body {}", id, request);
+    public void statusChanged(@PathVariable Long id, @RequestBody Object request) throws JsonProcessingException {
+        log.info("Received /issues/{}/status-changed with body {}", id,
+                new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(request));
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
