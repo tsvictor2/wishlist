@@ -12,7 +12,7 @@ spring:
 #    password: oracle
 #    url: jdbc:oracle:thin:@localhost:32988:xe
   datasource:
-    url: jdbc:postgresql://ec2-63-35-156-160.eu-west-1.compute.amazonaws.com:5432/da9e4viav6mhqv?user=pajulknpxnwcfp&password=e9afae34e08fd8760aa3ca88639b25199a3ba126f623f2d229c365f4cd9fc5ce
+    url: jdbc:postgresql://ec2-63-35-156-160.eu-west-1.compute.amazonaws.com:5432/da9e4viav6mhqv?user=pajulknpxnwcfp&password=e9afae34e08fd8760aa3ca88639b25199a3ba126f623f2d229c365f4cd9fc5ce&currentSchema=public
     driver-class-name: org.postgresql.Driver
     max-active: 10
     max-idle: 5

@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Builder
-@Table("LIKE_")
+@Table("like_")
 public class Like {
     @Id
     private String email;

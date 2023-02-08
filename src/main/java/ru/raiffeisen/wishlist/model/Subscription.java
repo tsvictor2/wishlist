@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Builder
-@Table("SUBSCRIPTION")
+@Table("subscription")
 public class Subscription {
     @Id
     private String email;

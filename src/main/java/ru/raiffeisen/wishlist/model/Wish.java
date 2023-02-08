@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Data
 @Builder
-@Table("WISH")
+@Table("wish")
 public class Wish {
     @Id
     private Long id;
