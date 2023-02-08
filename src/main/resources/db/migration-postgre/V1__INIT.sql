@@ -10,14 +10,16 @@ create table WISH
 
 create table LIKE_
 (
-    EMAIL   VARCHAR(100) PRIMARY KEY               NOT NULL,
-    WISH_ID INTEGER                                NOT NULL,
-    CREATED TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+    ID      INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
+    EMAIL   VARCHAR(100)                                     NOT NULL,
+    WISH_ID INTEGER                                          NOT NULL,
+    CREATED TIMESTAMP WITH TIME ZONE DEFAULT NOW()           NOT NULL
 );
 
 create table SUBSCRIPTION
 (
-    EMAIL   VARCHAR(100) PRIMARY KEY               NOT NULL,
-    WISH_ID INTEGER                                NOT NULL,
-    CREATED TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+    ID      INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
+    EMAIL   VARCHAR(100)                                     NOT NULL,
+    WISH_ID INTEGER                                          NOT NULL,
+    CREATED TIMESTAMP WITH TIME ZONE DEFAULT NOW()           NOT NULL
 );

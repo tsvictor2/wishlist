@@ -21,7 +21,7 @@ public class WishResponse {
         this.product = wish.getProduct().name();
         this.created = wish.getCreated();
         this.status = wish.getStatus().name();
-        this.likes = wish.getLikes().size();
+        this.likes = wish.getLikes() == null ? 0 : wish.getLikes().size();
         this.limit = wish.getProduct().getLimit();
         this.liked = wish.getLikes().stream().anyMatch(l -> l.getEmail().equals(email));
         this.subscribed = wish.getSubscription().stream().anyMatch(l -> l.getEmail().equals(email));

@@ -10,5 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("like_")
 public class Like {
     @Id
+    private Long id;
     private String email;
 }

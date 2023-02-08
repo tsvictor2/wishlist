@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -18,10 +19,12 @@ public class Wish {
     private String title;
     private String description;
     private ProductType product;
-    @MappedCollection(idColumn = "WISH_ID")
-    private Set<Like> likes;
-    @MappedCollection(idColumn = "WISH_ID")
-    private Set<Subscription> subscription;
+    @MappedCollection(idColumn = "wish_id")
+    @Builder.Default
+    private Set<Like> likes = new HashSet<>();
+    @MappedCollection(idColumn = "wish_id")
+    @Builder.Default
+    private Set<Subscription> subscription = new HashSet<>();
     private OffsetDateTime created;
     private Status status;
 }

@@ -10,5 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("subscription")
 public class Subscription {
     @Id
+    private Long id;
     private String email;
 }
