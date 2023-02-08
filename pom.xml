@@ -53,7 +53,10 @@
 			<artifactId>orai18n</artifactId>
 			<version>${ojdbc.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>oracle-xe</artifactId>

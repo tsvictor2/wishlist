@@ -6,7 +6,16 @@ spring:
   flyway:
     baseline-on-migrate: true
     baseline-version: 0
+    locations: classpath:db/migration-postgre
+  #  datasource:
+#    username: system
+#    password: oracle
+#    url: jdbc:oracle:thin:@localhost:32988:xe
   datasource:
-    username: system
-    password: oracle
-    url: jdbc:oracle:thin:@localhost:32988:xe
+    url: jdbc:postgresql://ec2-63-35-156-160.eu-west-1.compute.amazonaws.com:5432/da9e4viav6mhqv?user=pajulknpxnwcfp&password=e9afae34e08fd8760aa3ca88639b25199a3ba126f623f2d229c365f4cd9fc5ce
+    driver-class-name: org.postgresql.Driver
+    max-active: 10
+    max-idle: 5
+    min-idle: 2
+    initial-size: 5
+    remove-abandoned: true
