@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import ru.raiffeisen.wishlist.model.ProductType;
+import ru.raiffeisen.wishlist.model.Status;
 import ru.raiffeisen.wishlist.model.Subscription;
 import ru.raiffeisen.wishlist.model.Wish;
 
@@ -12,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-import static ru.raiffeisen.wishlist.model.Status.MODERATION;
 
 @Getter
 @Builder
@@ -32,7 +32,7 @@ public class AddWishRequest {
                 .product(product)
                 .subscription(Set.of(Subscription.builder().email(email).build()))
                 .created(OffsetDateTime.now())
-                .status(MODERATION)
+                .status(Status.MODERTION)
                 .build();
     }
 }

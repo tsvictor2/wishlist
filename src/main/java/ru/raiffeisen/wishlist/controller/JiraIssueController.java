@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.raiffeisen.wishlist.controller.model.JiraIssueStatusChangedRequest;
+import ru.raiffeisen.wishlist.exception.StatusNotFoundException;
+import ru.raiffeisen.wishlist.exception.WishNotFoundException;
+import ru.raiffeisen.wishlist.repository.WishRepository;
 
 @Slf4j
 @RestController
@@ -20,16 +24,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/issues")
 public class JiraIssueController {
 
+    private final WishRepository wishRepository;
+
     @Operation(summary = "Оповещение о смене статуса задачи в Jira")
     @PostMapping("/{id}/status-changed")
-    public void statusChanged(@PathVariable Long id, @RequestBody Object request) throws JsonProcessingException {
-        log.info("Received /issues/{}/status-changed with body {}", id,
-                new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(request));
+    public void statusChanged(@PathVariable Long id,
+                              @RequestBody JiraIssueStatusChangedRequest request) throws JsonProcessingException {
+        log.info("POST /issues/{}/status-changed with body={}",
+                id, new ObjectMapper().writeValueAsString(request));
+        wishRepository.findByJiraIssueId(id)
+                .ifPresentOrElse(
+                        wish -> {
+                            wishRepository.save(wish.toBuilder().status(request.toStatus()).build());
+                            //todo: send emails to subscribers
+                        },
+                        () -> {throw new WishNotFoundException();});
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(RuntimeException.class)
-    void onDbActionExecutionException(RuntimeException e) {
-        log.warn("Something went wrong.", e);
+    @ExceptionHandler
+    void onWishNotFoundException(WishNotFoundException e) {
+        log.warn("Заявка не найдена", e);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler
+    void onStatusNotFoundException(StatusNotFoundException e) {
+        log.warn("Неизвестный статус", e);
     }
 }

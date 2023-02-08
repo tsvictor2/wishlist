@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @Table("wish")
 public class Wish {
     @Id
@@ -27,4 +27,5 @@ public class Wish {
     private Set<Subscription> subscription = new HashSet<>();
     private OffsetDateTime created;
     private Status status;
+    private Long jiraIssueId;
 }
