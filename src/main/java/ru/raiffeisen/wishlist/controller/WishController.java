@@ -18,6 +18,7 @@ import ru.raiffeisen.wishlist.controller.model.WishResponse;
 import ru.raiffeisen.wishlist.exception.WishNotFoundException;
 import ru.raiffeisen.wishlist.model.Like;
 import ru.raiffeisen.wishlist.model.Subscription;
+import ru.raiffeisen.wishlist.model.Wish;
 import ru.raiffeisen.wishlist.repository.WishRepository;
 
 import javax.validation.Valid;
@@ -49,7 +50,7 @@ public class WishController {
     @Operation(summary = "Лайк/дизлайк")
     @PostMapping("/{id}/likes")
     public WishResponse like(@AuthorizationHeader String Authorization, @PathVariable Long id) {
-        var wish = wishRepository.findById(id).orElseThrow(WishNotFoundException::new);
+        Wish wish = wishRepository.findById(id).orElseThrow(WishNotFoundException::new);
         if (wish.getLikes().stream().anyMatch(like -> like.getEmail().equals(Authorization))) {
             wish.getLikes().removeIf(like -> like.getEmail().equals(Authorization));
         } else {
@@ -61,7 +62,7 @@ public class WishController {
     @Operation(summary = "Подписка/отписка")
     @PostMapping("/{id}/subscriptions")
     public WishResponse subscribe(@AuthorizationHeader String email, @PathVariable Long id) {
-        var wish = wishRepository.findById(id).orElseThrow(WishNotFoundException::new);
+        Wish wish = wishRepository.findById(id).orElseThrow(WishNotFoundException::new);
         if (wish.getSubscription().stream().anyMatch(like -> like.getEmail().equals(email))) {
             wish.getSubscription().removeIf(like -> like.getEmail().equals(email));
         } else {
