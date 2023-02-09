@@ -14,7 +14,7 @@
     <!--[if mso]>
     <![endif]-->
 </head>
-<body style="margin:0;padding:0; background-color: #E5E5E5;">
-<img src="cid:${status}" />
+<body style="margin:0;padding:0; background-color: #FFFFFF;">
+<img src="cid:${status}" width="800px" />
 </body>
 </html>

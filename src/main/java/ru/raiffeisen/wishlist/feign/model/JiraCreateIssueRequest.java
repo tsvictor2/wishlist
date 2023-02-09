@@ -7,10 +7,25 @@ import ru.raiffeisen.wishlist.model.ProductType;
 import java.util.List;
 
 public class JiraCreateIssueRequest {
-    public JiraCreateIssueRequest(
-            String title, String description, ProductType product
-    ){
-
+    public JiraCreateIssueRequest(String title, String description, ProductType product) {
+        this.fields = Fields.builder()
+                .summary(title)
+                .issuetype(Fields.Issuetype.builder().build())
+                .project(Fields.Project.builder().build())
+                .customfield_10047(Fields.Customfield_10047.builder()
+                        .value(product.name())
+                        .build())
+                .description(Fields.Description.builder()
+                        .content(List.of(Fields.Description.ContentField.builder()
+                                .content(List.of(Fields.Description.ContentField.ContentFieldInternal.builder()
+                                        .text(description)
+                                        .build()))
+                                .build()))
+                        .build())
+                .reporter(Fields.Reporter.builder().build())
+                .labels(Fields.Labels.builder().build())
+                .assignee(Fields.Assignee.builder().build())
+                .build();
     }
 
     private Fields fields;
@@ -19,6 +34,13 @@ public class JiraCreateIssueRequest {
     @Builder
     public static class Fields {
         private String summary;
+        private Issuetype issuetype;
+        private Project project;
+        private Customfield_10047 customfield_10047;
+        private Description description;
+        private Reporter reporter;
+        private Labels labels;
+        private Assignee assignee;
 
         @Data
         @Builder
@@ -49,6 +71,7 @@ public class JiraCreateIssueRequest {
             @Builder.Default
             private int version = 1;
             private List<ContentField> content;
+
             @Data
             @Builder
             public static class ContentField {
@@ -73,8 +96,11 @@ public class JiraCreateIssueRequest {
             private String id = "5f36cca2323607003868a111";
         }
 
+        @Data
+        @Builder
         public static class Labels {
-
+            @Builder.Default
+            List<String> labels = List.of("wish");
         }
 
         @Data

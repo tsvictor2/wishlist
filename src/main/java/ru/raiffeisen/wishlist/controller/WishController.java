@@ -16,6 +16,8 @@ import ru.raiffeisen.wishlist.controller.handler.AuthorizationHeader;
 import ru.raiffeisen.wishlist.controller.model.AddWishRequest;
 import ru.raiffeisen.wishlist.controller.model.WishResponse;
 import ru.raiffeisen.wishlist.exception.WishNotFoundException;
+import ru.raiffeisen.wishlist.feign.JiraClient;
+import ru.raiffeisen.wishlist.feign.model.JiraCreateIssueRequest;
 import ru.raiffeisen.wishlist.model.Like;
 import ru.raiffeisen.wishlist.model.Subscription;
 import ru.raiffeisen.wishlist.model.Wish;
@@ -32,6 +34,7 @@ import java.util.stream.StreamSupport;
 public class WishController {
 
     private final WishRepository wishRepository;
+    private final JiraClient jiraClient;
 
     @Operation(summary = "Список заявок")
     @GetMapping
@@ -44,7 +47,9 @@ public class WishController {
     @PostMapping
     public WishResponse add(@AuthorizationHeader String email,
                             @RequestBody @Valid AddWishRequest request) {
-        return new WishResponse(wishRepository.save(request.toWish(email)), email);
+        var response = jiraClient.createIssue(new JiraCreateIssueRequest(
+                request.getTitle(), request.getDescription(), request.getProduct()));
+        return new WishResponse(wishRepository.save(request.toWish(email, response.getId())), email);
     }
 
     @Operation(summary = "Лайк/дизлайк")

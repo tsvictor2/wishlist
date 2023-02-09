@@ -26,7 +26,7 @@ public class AddWishRequest {
     private ProductType product;
     private Boolean internal;
 
-    public Wish toWish(String email) {
+    public Wish toWish(String email, String jiraIssuId) {
         return Wish.builder()
                 .title(title)
                 .description(description)
@@ -35,6 +35,7 @@ public class AddWishRequest {
                 .created(OffsetDateTime.now())
                 .status(Status.MODERATION)
                 .isInternal(internal)
+                .jiraIssueId(Long.valueOf(jiraIssuId))
                 .build();
     }
 }
