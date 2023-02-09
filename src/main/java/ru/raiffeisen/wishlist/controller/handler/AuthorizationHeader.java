@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Parameter(in = ParameterIn.HEADER, example = "c3RyaW5n")
+@Parameter(in = ParameterIn.HEADER, name = "Authorization", example = "c3RyaW5n")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 public @interface AuthorizationHeader {}

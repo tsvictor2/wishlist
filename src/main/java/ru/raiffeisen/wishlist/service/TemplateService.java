@@ -39,9 +39,9 @@ public class TemplateService {
         htmlPart.setText(text, "UTF-8", "html");
         var multipart = new MimeMultipart("related");
         multipart.addBodyPart(htmlPart);
-        var fileName = status.name() + ".jpg";
+        var fileName = status.name() + ".png";
         var resourceBytes = new ClassPathResource("email/images/" + fileName).getInputStream().readAllBytes();
-        var dataHandler = new DataHandler(new ByteArrayDataSource(resourceBytes, "image/jpg"));
+        var dataHandler = new DataHandler(new ByteArrayDataSource(resourceBytes, "image/png"));
         var imagePart = new MimeBodyPart();
         imagePart.setDataHandler(dataHandler);
         imagePart.setFileName(fileName);

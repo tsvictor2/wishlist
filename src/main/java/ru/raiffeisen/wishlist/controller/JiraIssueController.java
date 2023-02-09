@@ -25,7 +25,7 @@ import ru.raiffeisen.wishlist.service.TemplateService;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.raiffeisen.wishlist.model.Status.CANCELL;
+import static ru.raiffeisen.wishlist.model.Status.CANCEL;
 import static ru.raiffeisen.wishlist.model.Status.DONE;
 import static ru.raiffeisen.wishlist.model.Status.IN_PROGRESS;
 import static ru.raiffeisen.wishlist.model.Status.IN_VOTE;
@@ -40,7 +40,7 @@ public class JiraIssueController {
     private final TemplateService templateService;
     private final EmailService emailService;
 
-    private static final Set<Status> NOTIFICATION_STATUSES = Set.of(CANCELL, DONE, IN_PROGRESS, IN_VOTE);
+    private static final Set<Status> NOTIFICATION_STATUSES = Set.of(CANCEL, DONE, IN_PROGRESS, IN_VOTE);
 
     @Operation(summary = "Оповещение о смене статуса задачи в Jira")
     @PostMapping("/{id}/status-changed")

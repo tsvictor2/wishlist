@@ -32,7 +32,7 @@ public class AddWishRequest {
                 .product(product)
                 .subscription(Set.of(Subscription.builder().email(email).build()))
                 .created(OffsetDateTime.now())
-                .status(Status.MODERTION)
+                .status(Status.MODERATION)
                 .build();
     }
 }
