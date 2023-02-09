@@ -14,7 +14,7 @@ public class JiraCreateIssueRequest {
                 .issuetype(Fields.Issuetype.builder().build())
                 .project(Fields.Project.builder().build())
                 .customfield_10047(Fields.Customfield_10047.builder()
-                        .value(product.name())
+                        .id(String.valueOf(product.getJiraProjectId()))
                         .build())
                 .description(Fields.Description.builder()
                         .content(List.of(Fields.Description.ContentField.builder()
@@ -24,7 +24,6 @@ public class JiraCreateIssueRequest {
                                 .build()))
                         .build())
                 .reporter(Fields.Reporter.builder().build())
-                .labels(Fields.Labels.builder().build())
                 .assignee(Fields.Assignee.builder().build())
                 .build();
     }
@@ -40,7 +39,6 @@ public class JiraCreateIssueRequest {
         private Customfield_10047 customfield_10047;
         private Description description;
         private Reporter reporter;
-        private Labels labels;
         private Assignee assignee;
 
         @Data
@@ -61,7 +59,7 @@ public class JiraCreateIssueRequest {
         @Builder
         // Product
         public static class Customfield_10047 {
-            private String value;
+            private String id;
         }
 
         @Data
@@ -95,13 +93,6 @@ public class JiraCreateIssueRequest {
         public static class Reporter {
             @Builder.Default
             private String id = "5f36cca2323607003868a111";
-        }
-
-        @Data
-        @Builder
-        public static class Labels {
-            @Builder.Default
-            List<String> labels = List.of("wish");
         }
 
         @Data
