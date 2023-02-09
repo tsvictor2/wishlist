@@ -54,8 +54,9 @@ public class WishController {
         } else {
             wish.getLikes().add(Like.builder().email(Authorization).build());
         }
-        if (wish.getLikes().size() >= wish.getProduct().getLimit() && wish.getStatus()== Status.IN_VOTE){
+        if (wish.getLikes().size() >= wish.getProduct().getLimit() && wish.getStatus() == Status.IN_VOTE){
             jiraClient.createTransition(wish.getJiraIssueId(), new JiraCreateIssueTransition(4));
+            wish.setStatus(Status.BACKLOG);
         }
         return new WishResponse(wishRepository.save(wish), Authorization);
     }
