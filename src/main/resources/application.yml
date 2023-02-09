@@ -11,7 +11,7 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     locations: classpath:db/migration-postgre
-  #  datasource:
+#    datasource:
 #    username: system
 #    password: oracle
 #    url: jdbc:oracle:thin:@localhost:32988:xe
@@ -41,5 +41,5 @@ templates:
   path: /email/templates/
 jira:
   username: anton.bazavluk@gmail.com
-  password: ATATT3xFfGF0DK9_kMiKKV2ZYOELcq4FuXZz2hh_BV-Ht583LQDndj4N2RjJOfNi1lgYrXcymlDHlqHzHQshIlNB86qDRRMdyRRfRuLe0xSBbHD_0E8JC1BPfAS8iJVJujggdkscyKyRrVP94rHkV9JXfcaLV1ootTICqopzw0rDmvmEdsAehGw=5D992BA4
+  password: ATATT3xFfGF0TAAvulh7Fa6hOQ9k_4g-6iYog4mC0gO6ibp_mmEvBkBDTZDT_Gkx0jLTeVZP7BGb4kLrH4tUiZzIOcD7WGgtM4lwuOD7xSKq229Zb9UEzpK4E8Mn98aNuGEWwkUoiHELDIHsaQ99PaLdQltvi935ysvpsqnX-LdZ8HiMWSUkDQ0=F26C7803
   url: https://getficha.atlassian.net
