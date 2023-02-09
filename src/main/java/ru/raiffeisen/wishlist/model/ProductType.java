@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ProductType {
     ACQUIRING(7, 10020),
-    ACDC(5, 10021),
+    ACDC(1, 10021),
     DCC(5, 10022),
     CREDIT(5, 10023),
     OFFICE(4, 10024),

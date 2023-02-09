@@ -11,6 +11,7 @@ spring:
     baseline-on-migrate: true
     baseline-version: 0
     locations: classpath:db/migration-postgre
+    #logging.level.ru.raiffeisen.wishlist.config.FeignConfig: DEBUG
 #    datasource:
 #    username: system
 #    password: oracle
@@ -43,3 +44,8 @@ jira:
   username: anton.bazavluk@gmail.com
   password: ENC(QyVe2Ec9sUxdRQXBFX2qqxZXV+GqIfPfeJbFV/G0ZTJnDWHHQvTQNJYEdttAyftu1t0hgOwjjMKtmPskNlJXmNRdh+/Q1+AShWXB9FdZEeZeZ+XBloflih/Rynz5qZOCiXjczb/Kyw8ZMymnQ6pI4WVucNOAtbGolp5UDGjSxDLbRTtn/o7OEdskwI58l7Y10ChO6amGLR2kyCRznX2VjOBNfO4K1MirlnJooU64cMmWuFLjRkmMLfAqelQLbOFCZNK0H+mInHXpbvub57WqzIUAD5KWgPULhsPzjt6pCDcndCuljyWvtI6MQqJWgKSc)
   url: https://getficha.atlassian.net
+feign:
+  client:
+    config:
+      jiraClient:
+        loggerLevel: FULL

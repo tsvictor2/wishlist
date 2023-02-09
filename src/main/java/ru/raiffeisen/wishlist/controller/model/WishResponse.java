@@ -26,6 +26,7 @@ public class WishResponse {
         this.liked = wish.getLikes().stream().anyMatch(l -> l.getEmail().equals(email));
         this.subscribed = wish.getSubscription().stream().anyMatch(l -> l.getEmail().equals(email));
         this.internal = Boolean.TRUE.equals(wish.getIsInternal());
+        this.jiraIssueId = wish.getJiraIssueId().intValue();
     }
 
     private Long id;
@@ -39,4 +40,5 @@ public class WishResponse {
     private boolean liked;
     private boolean subscribed;
     private boolean internal;
+    private int jiraIssueId;
 }
