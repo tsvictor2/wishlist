@@ -47,8 +47,10 @@ public class WishController {
     @PostMapping
     public WishResponse add(@AuthorizationHeader String email,
                             @RequestBody @Valid AddWishRequest request) {
+        log.info(email);
         var response = jiraClient.createIssue(new JiraCreateIssueRequest(
-                request.getTitle(), request.getDescription(), request.getProduct()));
+                request.getTitle(), request.getDescription(), request.getProduct(), email));
+                log.info(String.valueOf(request));
         return new WishResponse(wishRepository.save(request.toWish(email, response.getId())), email);
     }
 

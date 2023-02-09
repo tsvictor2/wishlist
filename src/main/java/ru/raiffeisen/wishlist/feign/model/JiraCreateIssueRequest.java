@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class JiraCreateIssueRequest {
-    public JiraCreateIssueRequest(String title, String description, ProductType product) {
+    public JiraCreateIssueRequest(String title, String description, ProductType product, String email) {
         this.fields = Fields.builder()
                 .summary(title)
                 .issuetype(Fields.Issuetype.builder().build())
@@ -25,6 +25,7 @@ public class JiraCreateIssueRequest {
                         .build())
                 .reporter(Fields.Reporter.builder().build())
                 .assignee(Fields.Assignee.builder().build())
+                .customfield_10049(email)
                 .build();
     }
 
@@ -40,6 +41,7 @@ public class JiraCreateIssueRequest {
         private Description description;
         private Reporter reporter;
         private Assignee assignee;
+        private String customfield_10049;
 
         @Data
         @Builder

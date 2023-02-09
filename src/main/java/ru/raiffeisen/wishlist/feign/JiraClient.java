@@ -8,10 +8,11 @@ import ru.raiffeisen.wishlist.feign.model.JiraCreateIssueRequest;
 import ru.raiffeisen.wishlist.feign.model.JiraCreateIssueResponse;
 
 @FeignClient(
-        value = "jiraClient",
+        name = "jiraClient",
         url = "${jira.url}",
         configuration = FeignConfig.class,
         path = "/rest/api/3")
+
 public interface JiraClient {
     @PostMapping(value = "/issue")
     JiraCreateIssueResponse createIssue(@RequestBody JiraCreateIssueRequest request);
