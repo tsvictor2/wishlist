@@ -1,6 +1,7 @@
 package ru.raiffeisen.wishlist.service;
 
 import lombok.SneakyThrows;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,10 +23,10 @@ class EmailServiceITest {
     private EmailService emailService;
 
     @Test
-    //@Disabled
+    @Disabled
     @SneakyThrows
     void send() {
         var mimeMultipart = templateService.getEmailMessageFromTemplate(Status.DONE);
-        emailService.send(Set.of("tsvictor2@gmail.com", "tsvictorr@gmail.com"), mimeMultipart);
+        emailService.send(Set.of(""), mimeMultipart);
     }
 }
