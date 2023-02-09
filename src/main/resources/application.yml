@@ -1,5 +1,9 @@
 ---
 server.port: 8001
+jasypt:
+  encryptor:
+    algorithm: PBEWithHmacSHA256AndAES_128
+    iv-generator-classname: org.jasypt.iv.RandomIvGenerator
 spring:
   application:
     name: wishlist
@@ -19,3 +23,19 @@ spring:
     min-idle: 2
     initial-size: 5
     remove-abandoned: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: qqqq54227@gmail.com
+    password: ENC(13XtFFZKxsWxjNa7D8MBnUv6XFNuvLBXZGK5O3iPAnELtEpaNAXnYmNrbSR150JrOMauyWPXEaliH+S7cH3/Sw==)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+templates:
+  path: /email/templates/

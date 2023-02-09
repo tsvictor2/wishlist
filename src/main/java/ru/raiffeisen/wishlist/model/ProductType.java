@@ -6,6 +6,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ProductType {
-    ACQUIRING(700), ADM(500), DCC(500);
+    ACQUIRING(7), ADM(5), DCC(5);
     private final int limit;
 }
