@@ -41,5 +41,5 @@ templates:
   path: /email/templates/
 jira:
   username: anton.bazavluk@gmail.com
-  password: ATATT3xFfGF0TAAvulh7Fa6hOQ9k_4g-6iYog4mC0gO6ibp_mmEvBkBDTZDT_Gkx0jLTeVZP7BGb4kLrH4tUiZzIOcD7WGgtM4lwuOD7xSKq229Zb9UEzpK4E8Mn98aNuGEWwkUoiHELDIHsaQ99PaLdQltvi935ysvpsqnX-LdZ8HiMWSUkDQ0=F26C7803
+  password: ENC(QyVe2Ec9sUxdRQXBFX2qqxZXV+GqIfPfeJbFV/G0ZTJnDWHHQvTQNJYEdttAyftu1t0hgOwjjMKtmPskNlJXmNRdh+/Q1+AShWXB9FdZEeZeZ+XBloflih/Rynz5qZOCiXjczb/Kyw8ZMymnQ6pI4WVucNOAtbGolp5UDGjSxDLbRTtn/o7OEdskwI58l7Y10ChO6amGLR2kyCRznX2VjOBNfO4K1MirlnJooU64cMmWuFLjRkmMLfAqelQLbOFCZNK0H+mInHXpbvub57WqzIUAD5KWgPULhsPzjt6pCDcndCuljyWvtI6MQqJWgKSc)
   url: https://getficha.atlassian.net
