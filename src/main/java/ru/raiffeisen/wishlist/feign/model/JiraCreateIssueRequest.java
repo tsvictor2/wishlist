@@ -6,6 +6,7 @@ import ru.raiffeisen.wishlist.model.ProductType;
 
 import java.util.List;
 
+@Data
 public class JiraCreateIssueRequest {
     public JiraCreateIssueRequest(String title, String description, ProductType product) {
         this.fields = Fields.builder()
