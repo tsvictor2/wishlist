@@ -4,23 +4,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.raiffeisen.wishlist.controller.handler.AuthorizationHeader;
 import ru.raiffeisen.wishlist.controller.model.AddWishRequest;
 import ru.raiffeisen.wishlist.controller.model.WishResponse;
 import ru.raiffeisen.wishlist.exception.WishNotFoundException;
 import ru.raiffeisen.wishlist.feign.JiraClient;
 import ru.raiffeisen.wishlist.feign.model.JiraCreateIssueRequest;
-import ru.raiffeisen.wishlist.model.Like;
-import ru.raiffeisen.wishlist.model.Subscription;
-import ru.raiffeisen.wishlist.model.Wish;
+import ru.raiffeisen.wishlist.feign.model.JiraCreateIssueTransition;
+import ru.raiffeisen.wishlist.model.*;
 import ru.raiffeisen.wishlist.repository.WishRepository;
 
 import javax.validation.Valid;
@@ -47,21 +39,23 @@ public class WishController {
     @PostMapping
     public WishResponse add(@AuthorizationHeader String email,
                             @RequestBody @Valid AddWishRequest request) {
-        log.info(email);
         var response = jiraClient.createIssue(new JiraCreateIssueRequest(
                 request.getTitle(), request.getDescription(), request.getProduct(), email));
-                log.info(String.valueOf(request));
         return new WishResponse(wishRepository.save(request.toWish(email, response.getId())), email);
     }
 
     @Operation(summary = "Лайк/дизлайк")
     @PostMapping("/{id}/likes")
-    public WishResponse like(@AuthorizationHeader String Authorization, @PathVariable Long id) {
+    public WishResponse like(@AuthorizationHeader String Authorization,
+                             @PathVariable Long id) {
         Wish wish = wishRepository.findById(id).orElseThrow(WishNotFoundException::new);
         if (wish.getLikes().stream().anyMatch(like -> like.getEmail().equals(Authorization))) {
             wish.getLikes().removeIf(like -> like.getEmail().equals(Authorization));
         } else {
             wish.getLikes().add(Like.builder().email(Authorization).build());
+        }
+        if (wish.getLikes().size() >= wish.getProduct().getLimit() && wish.getStatus()== Status.IN_VOTE){
+            jiraClient.createTransition(wish.getJiraIssueId(), new JiraCreateIssueTransition(4));
         }
         return new WishResponse(wishRepository.save(wish), Authorization);
     }
