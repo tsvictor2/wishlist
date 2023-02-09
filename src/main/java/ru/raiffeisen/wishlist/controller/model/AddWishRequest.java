@@ -24,6 +24,7 @@ public class AddWishRequest {
     private String description;
     @NotNull
     private ProductType product;
+    private Boolean internal;
 
     public Wish toWish(String email) {
         return Wish.builder()
@@ -33,6 +34,7 @@ public class AddWishRequest {
                 .subscription(Set.of(Subscription.builder().email(email).build()))
                 .created(OffsetDateTime.now())
                 .status(Status.MODERATION)
+                .isInternal(internal)
                 .build();
     }
 }

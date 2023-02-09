@@ -25,6 +25,7 @@ public class WishResponse {
         this.limit = wish.getProduct().getLimit();
         this.liked = wish.getLikes().stream().anyMatch(l -> l.getEmail().equals(email));
         this.subscribed = wish.getSubscription().stream().anyMatch(l -> l.getEmail().equals(email));
+        this.internal = Boolean.TRUE.equals(wish.getIsInternal());
     }
 
     private Long id;
@@ -37,4 +38,5 @@ public class WishResponse {
     private int limit;
     private boolean liked;
     private boolean subscribed;
+    private boolean internal;
 }
