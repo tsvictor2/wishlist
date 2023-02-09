@@ -27,5 +27,6 @@ public class Wish {
     private Set<Subscription> subscription = new HashSet<>();
     private OffsetDateTime created;
     private Status status;
+    private Boolean isInternal;
     private Long jiraIssueId;
 }

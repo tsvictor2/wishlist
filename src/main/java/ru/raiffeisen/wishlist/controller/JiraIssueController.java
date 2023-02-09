@@ -16,7 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.raiffeisen.wishlist.controller.model.JiraIssueStatusChangedRequest;
 import ru.raiffeisen.wishlist.exception.StatusNotFoundException;
 import ru.raiffeisen.wishlist.exception.WishNotFoundException;
+import ru.raiffeisen.wishlist.model.Status;
+import ru.raiffeisen.wishlist.model.Subscription;
 import ru.raiffeisen.wishlist.repository.WishRepository;
+import ru.raiffeisen.wishlist.service.EmailService;
+import ru.raiffeisen.wishlist.service.TemplateService;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static ru.raiffeisen.wishlist.model.Status.CANCEL;
+import static ru.raiffeisen.wishlist.model.Status.DONE;
+import static ru.raiffeisen.wishlist.model.Status.IN_PROGRESS;
+import static ru.raiffeisen.wishlist.model.Status.IN_VOTE;
 
 @Slf4j
 @RestController
@@ -25,6 +37,10 @@ import ru.raiffeisen.wishlist.repository.WishRepository;
 public class JiraIssueController {
 
     private final WishRepository wishRepository;
+    private final TemplateService templateService;
+    private final EmailService emailService;
+
+    private static final Set<Status> NOTIFICATION_STATUSES = Set.of(CANCEL, DONE, IN_PROGRESS, IN_VOTE);
 
     @Operation(summary = "Оповещение о смене статуса задачи в Jira")
     @PostMapping("/{id}/status-changed")
@@ -35,10 +51,14 @@ public class JiraIssueController {
         wishRepository.findByJiraIssueId(id)
                 .ifPresentOrElse(
                         wish -> {
-                            wishRepository.save(wish.toBuilder().status(request.toStatus()).build());
-                            //todo: send emails to subscribers
-                        },
-                        () -> {throw new WishNotFoundException();});
+                            wish = wishRepository.save(wish.toBuilder().status(request.toStatus()).build());
+                            if (NOTIFICATION_STATUSES.contains(wish.getStatus())) {
+                                var mime = templateService.getEmailMessageFromTemplate(wish.getStatus());
+                                emailService.send(
+                                        wish.getSubscription().stream().map(Subscription::getEmail).collect(Collectors.toSet()),
+                                        mime);
+                            }
+                        }, () -> {throw new WishNotFoundException();});
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

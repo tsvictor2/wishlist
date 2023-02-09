@@ -7,13 +7,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public enum Status {
-    MODERTION(10000),
+    MODERATION(10000),
     IN_VOTE(10001),
     BACKLOG(10013),
     START(10014),
     IN_PROGRESS(10012),
     DONE(10002),
-    CANCELL(10015);
+    CANCEL(10015);
 
     private final long jiraId;
 
