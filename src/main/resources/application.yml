@@ -19,3 +19,7 @@ spring:
     min-idle: 2
     initial-size: 5
     remove-abandoned: true
+jira:
+  username: anton.bazavluk@gmail.com
+  password: ATATT3xFfGF0DK9_kMiKKV2ZYOELcq4FuXZz2hh_BV-Ht583LQDndj4N2RjJOfNi1lgYrXcymlDHlqHzHQshIlNB86qDRRMdyRRfRuLe0xSBbHD_0E8JC1BPfAS8iJVJujggdkscyKyRrVP94rHkV9JXfcaLV1ootTICqopzw0rDmvmEdsAehGw=5D992BA4
+  url: https://getficha.atlassian.net
