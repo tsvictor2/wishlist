@@ -26,7 +26,7 @@ public class WishResponse {
         this.liked = wish.getLikes().stream().anyMatch(l -> l.getEmail().equals(email));
         this.subscribed = wish.getSubscription().stream().anyMatch(l -> l.getEmail().equals(email));
         this.internal = Boolean.TRUE.equals(wish.getIsInternal());
-        this.jiraIssueId = wish.getJiraIssueId() == null ? null : wish.getJiraIssueId().intValue();
+        this.jiraIssueId = wish.getJiraIssueId() == null ? 0 : wish.getJiraIssueId().intValue();
     }
 
     private Long id;
